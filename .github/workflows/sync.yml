@@ -11,8 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check fork
+        if: github.repository_owner != 'Stoppedwumm'
+        run: exit 0
       - uses: tgymnich/fork-sync@v1.8
         with:
           owner: Stoppedwumm
           base: master
           head: master
+          auto_approve: true
