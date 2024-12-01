@@ -1,4 +1,4 @@
-export default function Post({title, cdnUrl}) {
+export default function Post({title, cdnUrl, tags}) {
     return (
         <div className="card m-3 p-3 w-50 text-center">
             <div className="card-body">
