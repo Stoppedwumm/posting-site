@@ -1,25 +1,37 @@
-name: Sync Fork with Upstream
-
+name: Merge upstream branches
 on:
-  repository_dispatch:
-    types: [sync-fork]
-
+  schedule:
+     # actually, ~5 minutes is the highest
+     # effective frequency you will get
+    - cron:  '* * * * *'
+  workflow_dispatch:
 jobs:
-  sync:
+  merge:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if it is a fork
-        if: github.event.repository.fork != true
+      - uses: actions/checkout@v2
+      - name: Merge upstream
         run: |
-          exit 1
-      - name: Checkout fork
-        uses: actions/checkout@v3
-        with:
-          ref: main  # Adjust to your default branch if different
+          git config --global user.name 'Stoppedwumm'
+          git config --global user.email 'Stoppedwumm@users.noreply.github.com'
 
-      - name: Add upstream remote
-        run: |
-          git remote add upstream https://github.com/Stoppedwumm-Studios/posting-site.git
+          # "git checkout master" is unnecessary, already here by default
+          git pull --unshallow  # this option is very important, you would get
+                                # complains about unrelated histories without it.
+                                # (but actions/checkout@v2 can also be instructed
+                                # to fetch all git depth right from the start)
+
+          git remote add upstream https://github.com/example/test.git
           git fetch upstream
-          git merge upstream/main --allow-unrelated-histories
-          git push origin main
+
+          # Neither forget the -b opt,
+          # the feature/x ref is ambiguous at this stage
+          git checkout -b feature/x origin/feature/x
+          git merge --no-edit upstream/feature/x
+          git push origin feature/x
+
+          git checkout master
+          git merge --no-edit upstream/master
+          git push origin master
+
+          # etc
