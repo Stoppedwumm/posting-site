@@ -12,6 +12,7 @@
     "@neondatabase/serverless": "^0.10.4",
     "@uploadcare/react-uploader": "^1.2.0",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"

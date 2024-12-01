@@ -1,7 +1,12 @@
+import dotenv from "dotenv"
+
+if (!process.env["VERCEL_ENV"] != "production") {
+  dotenv.config({path: "./.env.local"})
+}
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        DATABASE_URL: process.env.DATABASE_URL || "postgresql://neondb_owner:HYgcRzWp67dI@ep-flat-cloud-a2ppy3b5.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+        DATABASE_URL: process.env.DATABASE_URL
     },
     experimental: {
         serverActions: {
