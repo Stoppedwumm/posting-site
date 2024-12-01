@@ -1,25 +1,18 @@
-name: Sync Fork with Upstream
+name: Sync Fork
 
 on:
-  repository_dispatch:
-    types: [sync-fork]
+  schedule:
+    - cron: '* * * * *'
+  workflow_dispatch: # on button click
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if it is a fork
-        if: github.event.repository.fork != true
-        run: |
-          exit 1
-      - name: Checkout fork
-        uses: actions/checkout@v3
-        with:
-          ref: main  # Adjust to your default branch if different
 
-      - name: Add upstream remote
-        run: |
-          git remote add upstream https://github.com/Stoppedwumm-Studios/posting-site.git
-          git fetch upstream
-          git merge upstream/main --allow-unrelated-histories
-          git push origin main
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v1.8
+        with:
+          owner: Stoppedwumm
+          base: master
+          head: master
