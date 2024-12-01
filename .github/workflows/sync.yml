@@ -20,3 +20,4 @@ jobs:
           base: master
           head: master
           ignore_fail: true
+          auto_merge: true
