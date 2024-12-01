@@ -20,3 +20,4 @@ jobs:
           base: master
           head: master
           auto_approve: true
+          ignore_fail: true
