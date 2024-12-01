@@ -19,4 +19,5 @@ jobs:
           owner: Stoppedwumm
           base: master
           head: master
-          auto_approve: true
+          ignore_fail: true
+          auto_merge: true
