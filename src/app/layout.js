@@ -19,8 +19,12 @@ export default function RootLayout({ children }) {
       {/* The body element contains all the content of the page. */}
       <body>
         <header className="d-flex p-2 flex-row mb-3 align-items-baseline">
-          <h1>random post page (rpp)</h1>
-          <Link href="/newPost" className="btn btn-primary" style={{ marginLeft: "auto" }}>new post</Link>
+          <h1><Link href="/" className="white">random post page (rpp)</Link></h1>
+          <div style={{ marginLeft: "auto" }}>
+          <Link href="/newPost" className="btn btn-primary" style={{ marginLeft: "100px" }}>new post</Link>
+          <Link href="/filter" className="btn btn-primary" style={{ marginLeft: "auto" }}>filter</Link>
+          </div>
+          
         </header>
         {children}
       </body>
