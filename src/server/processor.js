@@ -34,7 +34,8 @@ export async function processPost(data) {
 
 export async function getPosts() {
     const posts = await sql(`SELECT * FROM posts`)
-    return posts
+    console.log(posts)
+    return posts.reverse()
 }
 export async function GetTags() {
     return tags
