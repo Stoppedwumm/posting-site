@@ -19,7 +19,7 @@ export default function Home() {
     <>
     <main>
       {p.length > 0 ? p.map((post) => (
-        <Post key={post.id} title={post.title} cdnUrl={post.content} />
+        <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags}/>
       )): <p>no posts yet</p>}
     </main>
     </>
