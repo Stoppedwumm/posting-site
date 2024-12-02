@@ -1,5 +1,5 @@
 "use client";
-import Upload from "@/comps/uploadComp";
+import Upload from "c/uploadComp";
 import { useState, useEffect, useTransition } from "react";
 import { processPost, GetTags } from "@/server/processor";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,7 @@
 "use client"
 import { getPosts, GetTags } from "@/server/processor";
 import { useState, useEffect, use } from "react";
-import Post from "@/comps/post"
+import Post from "c/post"
 
 export default function Filter() {
     const [posts, setPosts] = useState([])
