@@ -1,5 +1,5 @@
 "use client"
-import Post from "@/comps/post";
+import Post from "c/post";
 import {getPosts} from "@/server/processor"
 import { useEffect, useState } from "react";
 
