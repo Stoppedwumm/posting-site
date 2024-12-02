@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 export async function POST(request) {
     const data = await request.json()
     console.log(data)
-    const res = await processPost(data)
+    await processPost(data)
     return new NextResponse("OK", { status: 200 })
 }
 
