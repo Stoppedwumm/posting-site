@@ -8,9 +8,12 @@ export default function Home() {
   const [p, setPosts] = useState([])
   useEffect(() => {
     async function exec() {
-      const posts = await getPosts()
+      let posts = await getPosts()
+      /* Only load 5 posts at a time */
+      posts = posts.slice(0, 10)
       setPosts(posts)
       console.log(posts)
+
     }
     exec()
 
@@ -18,6 +21,8 @@ export default function Home() {
   return (
     <>
     <main>
+      <h1>Top 10 latest posts:</h1>
+      {/* Only load 5 posts at a time */}
       {p.length > 0 ? p.map((post) => (
         <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags}/>
       )): <p>no posts yet</p>}
