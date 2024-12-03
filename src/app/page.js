@@ -24,7 +24,7 @@ export default function Home() {
       <h1>Top 10 latest posts:</h1>
       {/* Only load 5 posts at a time */}
       {p.length > 0 ? p.map((post) => (
-        <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags}/>
+        <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
       )): <p>no posts yet</p>}
     </main>
     </>

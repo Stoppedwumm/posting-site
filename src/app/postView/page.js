@@ -36,7 +36,7 @@ export default function Home() {
     return (
         <>
             {post != undefined ?
-                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} />
+                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
                 : loaded ? <p>post not found</p> : <p>loading...</p>}
             <h1>Comments</h1>
             <h2>Add a comment</h2>
