@@ -50,7 +50,7 @@ export default function Home() {
                 setComments(c)
                 e.target.comment.value = ""
             }}>
-                <input type="text" name="comment" autoComplete="false" />
+                <input type="text" name="comment" autoComplete="off" />
                 <button type="submit">submit</button>
             </form>
             {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
