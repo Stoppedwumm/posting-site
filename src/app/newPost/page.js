@@ -60,7 +60,7 @@ export default function NewPost() {
                     if (e.isSuccess) {
                         const validEntry = e.allEntries.find((entry) => entry.isSuccess);
                         if (validEntry) {
-                            console.log(validEntry);
+                            //console.log(validEntry);
                             setFile(validEntry); // Replace with the single file
                         }
                     }

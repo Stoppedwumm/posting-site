@@ -9,10 +9,9 @@ export default function Home() {
   useEffect(() => {
     async function exec() {
       let posts = await getPosts()
-      /* Only load 5 posts at a time */
       posts = posts.slice(0, 10)
       setPosts(posts)
-      console.log(posts)
+      //console.log(posts)
 
     }
     exec()
