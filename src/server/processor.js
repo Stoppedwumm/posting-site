@@ -1,7 +1,7 @@
 "use server"
 import { neon } from "@neondatabase/serverless";
 const sql = neon(process.env.DATABASE_URL, { ssl: { rejectUnauthorized: false } });
-let tags = ["memes", "funny", "awards"]
+let tags = ["memes", "funny", "awards", "wat?", "genau diggi", "wieso?", "hör mit deinen augen"]
 // try creating table if not exists
 sql(`CREATE TABLE IF NOT EXISTS posts (id SERIAL PRIMARY KEY, title VARCHAR(255), content VARCHAR(255), tags TEXT[])`)
 sql('CREATE TABLE IF NOT EXISTS comments (id SERIAL PRIMARY KEY, post_id INTEGER, content VARCHAR(255))')
