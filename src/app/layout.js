@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import "@/custom.css";
+import { Suspense } from 'react'
 /**
  * The root layout component.
  *
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
           </div>
           
         </header>
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
       </body>
     </html>
   );

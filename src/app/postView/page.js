@@ -2,15 +2,15 @@
 import { getPosts, ProcessComment, GetComments } from "@/server/processor";
 import Post from "c/post";
 import Comment from "c/comment";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function Home() {
     const [post, setPost] = useState(undefined)
     const [loaded, setLoaded] = useState(false)
     const [comments, setComments] = useState([])
+    const searchParams = useSearchParams()
     useEffect(() => {
-        const searchParams = useSearchParams()
         async function exec() {
             const p = await getPosts();
             p.every((po) => {
