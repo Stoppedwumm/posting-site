@@ -1,7 +1,7 @@
 import { encrypt } from '@vercel/flags';
 import { FlagValues } from '@vercel/flags/react';
- 
-export async function ConfidentialFlagValues({ values }) {
-  const encryptedFlagValues = await encrypt(values, process.env.FLAGS_SECRET);
+
+export async function ConfidentialFlagValues({ values, secret }) {
+  const encryptedFlagValues = await encrypt(values, secret);
   return <FlagValues values={encryptedFlagValues} />;
 }

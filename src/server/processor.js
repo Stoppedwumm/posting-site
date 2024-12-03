@@ -66,3 +66,7 @@ export async function GetComments(postId) {
     const comments = (await sql(`SELECT * FROM comments WHERE post_id = ${postId}`)).reverse()
     return comments
 }
+
+export async function getFlagsSecret() {
+    return process.env.FLAGS_SECRET
+}
