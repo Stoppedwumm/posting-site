@@ -9,8 +9,8 @@ export default function Home() {
     const [post, setPost] = useState(undefined)
     const [loaded, setLoaded] = useState(false)
     const [comments, setComments] = useState([])
-    const searchParams = useSearchParams()
     useEffect(() => {
+        const searchParams = useSearchParams()
         async function exec() {
             const p = await getPosts();
             p.every((po) => {
