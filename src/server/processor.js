@@ -34,7 +34,7 @@ export async function processPost(data) {
 
     try {
         const res = await sql(query); // Assuming sql is a function that runs the query
-        console.log(res); // Log the result for debugging
+        //console.log(res); // Log the result for debugging
     } catch (err) {
         console.error("Error inserting post:", err); // Handle errors
     }
@@ -55,7 +55,7 @@ export async function ProcessComment(data) {
     const query = `INSERT INTO comments (post_id, content) VALUES (${post_id}, '${comment}')`
     try {
         const res = await sql(query); // Assuming sql is a function that runs the query
-        console.log(res); // Log the result for debugging
+        //console.log(res); // Log the result for debugging
     } catch (err) {
         console.error("Error inserting post:", err); // Handle errors
     }

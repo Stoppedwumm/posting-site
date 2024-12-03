@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 export async function POST(request) {
     const data = await request.json()
-    console.log(data)
+    //console.log(data)
     await processPost(data)
     return new NextResponse("OK", { status: 200 })
 }
