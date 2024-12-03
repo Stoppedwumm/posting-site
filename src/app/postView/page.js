@@ -9,6 +9,7 @@ export default function Home() {
     const [post, setPost] = useState(undefined)
     const [loaded, setLoaded] = useState(false)
     const [comments, setComments] = useState([])
+    const [commentLoading, setCommentLoading] = useState(false)
     const searchParams = useSearchParams()
     useEffect(() => {
         async function exec() {
@@ -29,6 +30,7 @@ export default function Home() {
             if (post != undefined) {
                 const c = await GetComments(post.id);
                 setComments(c)
+                setCommentLoading(true)
             }
         }
         exec()
@@ -53,7 +55,7 @@ export default function Home() {
                 <input type="text" name="comment" autoComplete="off" />
                 <button type="submit">submit</button>
             </form>
-            {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+            {commentLoading ? comments.length == 0 ? <p>no comments yet</p> : comments.map(comment => <Comment key={comment.id} comment={comment} />) : <p>loading...</p>}
         </>
     )
 }
