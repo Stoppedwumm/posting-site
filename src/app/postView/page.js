@@ -48,8 +48,9 @@ export default function Home() {
                 }])
                 const c = await GetComments(post.id);
                 setComments(c)
+                e.target.comment.value = ""
             }}>
-                <input type="text" name="comment" />
+                <input type="text" name="comment" autoComplete="off" />
                 <button type="submit">submit</button>
             </form>
             {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
