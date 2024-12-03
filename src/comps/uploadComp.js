@@ -11,6 +11,7 @@ export default function Upload({onChange}) {
                 onChange={onChange}
                 multiple="false"
                 img-only="true"
+                use-cloud-image-editor="true"
             />
         </div>
     );
