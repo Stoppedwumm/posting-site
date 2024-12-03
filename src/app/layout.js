@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import "@/custom.css";
 import { Suspense } from 'react'
+import { VercelToolbar } from "@vercel/toolbar/next"
 /**
  * The root layout component.
  *
@@ -27,7 +28,10 @@ export default function RootLayout({ children }) {
           </div>
           
         </header>
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+        {children}
+        </Suspense>
+        <VercelToolbar />
       </body>
     </html>
   );
