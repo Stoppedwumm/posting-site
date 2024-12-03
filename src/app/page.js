@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
     <main>
-      {secret != undefined ? <ConfidentialFlagValues values={{ exampleFlag: true }} >
+      {secret != undefined ? <ConfidentialFlagValues values={{ exampleFlag: true }} secret={secret}>
         <h1>Confidential Flag Values</h1>
       </ConfidentialFlagValues>: undefined}
       <h1>Top 10 latest posts:</h1>
