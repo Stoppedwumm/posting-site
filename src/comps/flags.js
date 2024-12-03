@@ -1,4 +1,3 @@
-"use server"
 import { encrypt } from '@vercel/flags';
 import { FlagValues } from '@vercel/flags/react';
  

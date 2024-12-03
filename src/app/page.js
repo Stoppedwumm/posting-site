@@ -4,8 +4,6 @@ import {getPosts} from "@/server/processor"
 import { useEffect, useState } from "react";
 import { ConfidentialFlagValues } from "@/comps/flags";
 
-
-
 export default function Home() {
   const [p, setPosts] = useState([])
   useEffect(() => {
