@@ -9,6 +9,8 @@ export default function Upload({onChange}) {
                 classNameUploader="uc-dark uc-orange"
                 pubkey="e773a3d06725475d2744"
                 onChange={onChange}
+                multiple="false"
+                img-only="true"
             />
         </div>
     );
