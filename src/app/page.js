@@ -2,10 +2,11 @@
 import Post from "c/post";
 import {getFlagsSecret, getPosts} from "@/server/processor"
 import { use, useEffect, useState } from "react";
-import { ConfidentialFlagValues } from "@/comps/flags";
+import { newFeature } from "@/flags";
 
 export default function Home() {
   const [p, setPosts] = useState([])
+  const [newFeatureEnabled, setNewFeatureEnabled] = useState(false)
   useEffect(() => {
     async function exec() {
       let posts = await getPosts()
@@ -15,22 +16,17 @@ export default function Home() {
 
     }
     exec()
-
   }, [])
-  const [secret, setSecret] = useState(undefined)
   useEffect(() => {
     async function exec() {
-      const secret = await getFlagsSecret()
-      setSecret(secret)
+      setNewFeatureEnabled(await newFeature())
     }
     exec()
-  }, [])
+  })
   return (
     <>
     <main>
-      {secret != undefined ? <ConfidentialFlagValues values={{ exampleFlag: true }} secret={secret}>
-        <h1>Confidential Flag Values</h1>
-      </ConfidentialFlagValues>: undefined}
+      {newFeatureEnabled ? <p>new feature enabled</p> : undefined}
       <h1>Top 10 latest posts:</h1>
       {/* Only load 5 posts at a time */}
       {p.length > 0 ? p.map((post) => (

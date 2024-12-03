@@ -12,6 +12,7 @@
     "@neondatabase/serverless": "^0.10.4",
     "@uploadcare/react-uploader": "^1.2.0",
     "@vercel/flags": "^2.6.3",
+    "@vercel/toolbar": "^0.1.27",
     "bootstrap": "^5.3.3",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
