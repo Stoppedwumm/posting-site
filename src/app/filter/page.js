@@ -39,7 +39,7 @@ export default function Filter() {
             )})}
             <h2>Posts</h2>
             {filteredPosts.map((post) => {return (
-                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags}/>
+                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
             )})}
         </div>
     );
