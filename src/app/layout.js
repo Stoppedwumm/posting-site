@@ -11,12 +11,15 @@ import { Suspense } from 'react'
  * @param {{ children: ReactNode[] }} props The props object.
  * @returns {ReactElement} The component.
  */
+
+export const metadata = {
+  title: "random post page (rpp)",
+  description: "random post page (rpp)",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-bs-theme="dark">
-      <head>
-        <title>rpp</title>
-      </head>
       {/* The body element contains all the content of the page. */}
       <body>
         <header className="d-flex p-2 flex-row mb-3 align-items-baseline">
