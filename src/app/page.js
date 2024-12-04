@@ -6,6 +6,7 @@ import { GrabFlagsEnabled } from "@/server/serverCFG";
 
 export default function Home() {
   const [p, setPosts] = useState([])
+  const [enabledFlags, setFlags] = useState([])
   useEffect(() => {
     async function exec() {
       let posts = await getPosts()
