@@ -1,8 +1,11 @@
+"use client"
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import "@/custom.css";
-import { Suspense } from 'react'
-import fb from "@/server/firebase"
+import { Suspense, useEffect } from 'react'
+import { initializeApp } from "firebase/app";
+import { getPerformance } from "firebase/performance"
+import firebaseConfig from "@/server/firebase";
 /**
  * The root layout component.
  *
@@ -13,23 +16,19 @@ import fb from "@/server/firebase"
  * @returns {ReactElement} The component.
  */
 
-export const metadata = {
-  title: "random post page (rpp)",
-  description: "random post page (rpp)",
-};
-
-export const viewport = {
-
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-
-}
-
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    async function exec() {
+      const app = initializeApp(firebaseConfig)
+      const perf = getPerformance(app);
+    }
+  })
   return (
     <html lang="en" data-bs-theme="dark">
       {/* The body element contains all the content of the page. */}
+      <head>
+        <title>rpp</title>
+      </head>
       <body>
         <header className="d-flex p-2 flex-row mb-3 align-items-baseline">
           <h1><Link href="/" className="white">random post page (rpp)</Link></h1>

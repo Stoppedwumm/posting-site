@@ -1,11 +1,9 @@
-// firebase.js
-import {initializeApp} from 'firebase/app';
-import { getAuth } from "firebase/auth";
+
 // ... other Firebase services as needed
 
 const firebaseConfig = {
 
-    apiKey: process.env.FIREBASEAPI,
+    apiKey: "AIzaSyCbw1J6zNztj_D3hehssda6fKuch8VLZGI",
   
     authDomain: "st-post-5f692.firebaseapp.com",
   
@@ -21,8 +19,4 @@ const firebaseConfig = {
   
   };  
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
-
-export {app, auth}
+export default firebaseConfig
