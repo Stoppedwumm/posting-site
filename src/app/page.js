@@ -2,6 +2,7 @@
 import Post from "c/post";
 import {getFlagsSecret, getPosts} from "@/server/processor"
 import { use, useEffect, useState } from "react";
+import { GrabFlagsEnabled } from "@/server/serverCFG";
 
 export default function Home() {
   const [p, setPosts] = useState([])
@@ -11,7 +12,7 @@ export default function Home() {
       posts = posts.slice(0, 10)
       setPosts(posts)
       //console.log(posts)
-
+      console.log(await GrabFlagsEnabled("example"))
     }
     exec()
   }, [])
