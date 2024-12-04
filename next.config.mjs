@@ -1,5 +1,4 @@
 import dotenv from "dotenv"
-import withVercelToolbar from "@vercel/toolbar/plugins/next"
 
 if (!process.env["VERCEL_ENV"] != "production") {
   dotenv.config({path: "./.env.local"})
@@ -16,4 +15,4 @@ const nextConfig = {
       },
 };
 
-export default withVercelToolbar()(nextConfig);
+export default nextConfig
