@@ -8,6 +8,21 @@ import fbConfig from '@/server/firebase';
 import { signInAnonymously, getAuth } from "firebase/auth";
 import {initializeApp} from 'firebase/app';
 
+/**
+ * The post view page.
+ *
+ * This component is responsible for rendering a post and its comments when
+ * given a post ID as a search parameter.
+ *
+ * It fetches the post and its comments from the server and stores them in state.
+ * It handles anonymous sign-in and user data fetching.
+ * It also handles adding comments and updating the like count.
+ *
+ * The rendered component includes:
+ * - The post itself, with a like button.
+ * - A section for comments, with a form to add a new comment.
+ * - A list of comments.
+ */
 export default function Home() {
     const [post, setPost] = useState(undefined)
     const [loaded, setLoaded] = useState(false)
