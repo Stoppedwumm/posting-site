@@ -4,6 +4,14 @@ import { useState, useEffect, useTransition } from "react";
 import { processPost, GetTags } from "@/server/processor";
 import { useRouter } from "next/navigation";
 
+/**
+ * The NewPost component allows users to upload an image and submit it to the server.
+ * It fetches tags from the server and displays them in a list format. Users can select
+ * one or more tags to associate with the post. The component also handles the submission
+ * process by calling the processPost function and passing the selected tags along with
+ * the uploaded file and title.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function NewPost() {
     const router = useRouter();
     const [file, setFile] = useState(null); // Single file state

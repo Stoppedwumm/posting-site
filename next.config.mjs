@@ -13,6 +13,18 @@ const nextConfig = {
       bodySizeLimit: '5mb',
     },
   },
+/**
+ * Returns an array of objects defining headers for the '/api/cdnImg' endpoint.
+ *
+ * The headers include:
+ * - Access-Control-Allow-Origin: '*' to allow all origins.
+ * - Access-Control-Allow-Methods: 'GET' to allow only GET requests.
+ * - Access-Control-Allow-Headers: 'Content-Type' to specify allowed headers.
+ * - Access-Control-Allow-Credentials: 'true' to allow credentials.
+ * - Content-Type: 'image/webp' to specify the media type of the resource.
+ *
+ * @returns {Array<Object>} An array containing header configuration objects.
+ */
   async headers() {
     return [
       {

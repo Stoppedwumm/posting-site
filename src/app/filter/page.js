@@ -6,6 +6,15 @@ import fbConfig from '@/server/firebase';
 import { signInAnonymously, getAuth } from "firebase/auth";
 import { initializeApp } from 'firebase/app'
 
+/**
+ * The Filter component is responsible for rendering a filter page.
+ * It fetches all posts and tags from the server and stores them in state.
+ * It also handles anonymous sign-in and user data fetching.
+ * The component renders a list of tags as checkboxes, and a list of posts.
+ * The posts are filtered based on the selected tags.
+ * When the user clicks on a tag, the posts are re-filtered.
+ * When the user clicks on a post's like button, the like count is updated in the server.
+ */
 export default function Filter() {
     const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])

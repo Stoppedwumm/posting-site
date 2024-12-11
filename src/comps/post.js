@@ -1,6 +1,11 @@
 import { Likebutton } from './likebutton';
 import Link from "next/link";
 
+/**
+ * A React component to display a post.
+ * @param {{title: string, cdnUrl: string, tags: string[], id: number, likes: number, onLikeClick: (event: React.MouseEvent<HTMLButtonElement>) => void}} props
+ * @returns {JSX.Element}
+ */
 export default function Post({title, cdnUrl, tags, id, likes, onLikeClick}) {
     return (
         <div className="card m-3 p-3 w-50 text-center">
