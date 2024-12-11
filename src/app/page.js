@@ -1,6 +1,6 @@
 "use client"
 import Post from "c/post";
-import {getPosts} from "@/server/processor"
+import {getPosts, ProcessUser, test} from "@/server/processor"
 import { useEffect, useState } from "react";
 import { GrabFlagsEnabled } from "@/server/serverCFG";
 import fbConfig from '@/server/firebase';
@@ -26,13 +26,15 @@ export default function Home() {
       const app = initializeApp(fbConfig)
       const auth = getAuth(app)
       const login = await signInAnonymously(auth)
-      setUser(await login.user.getIdToken())
+      setUser(login.user)
     }
     exec()
   }, [])
   useEffect(() => {
     async function exec() {
-      
+      if (user != undefined) {
+        await test(user.uid)
+      }
     }
     exec()
   }, [user])
