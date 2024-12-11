@@ -4,6 +4,9 @@ import Post from "c/post";
 import Comment from "c/comment";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import fbConfig from '@/server/firebase';
+import { signInAnonymously, getAuth } from "firebase/auth";
+import {initializeApp} from 'firebase/app';
 
 export default function Home() {
     const [post, setPost] = useState(undefined)
@@ -36,6 +39,15 @@ export default function Home() {
         }
         exec()
     }, [post])
+    useEffect(() => {
+        async function exec() {
+          const app = initializeApp(fbConfig)
+          const auth = getAuth(app)
+          const login = await signInAnonymously(auth)
+          setUser(login.user)
+        }
+        exec()
+      }, [])
     useEffect(() => {
         async function exec() {
           if (user != undefined) {
