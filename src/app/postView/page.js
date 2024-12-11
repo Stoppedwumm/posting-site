@@ -1,5 +1,5 @@
 "use client"
-import { getPosts, ProcessComment, GetComments, setUser, getUser } from "@/server/processor";
+import { getPosts, ProcessComment, GetComments, setUser as SU, getUser } from "@/server/processor";
 import Post from "c/post";
 import Comment from "c/comment";
 import { useEffect, useState } from "react";
@@ -59,7 +59,15 @@ export default function Home() {
     return (
         <>
             {post != undefined ?
-                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
+                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={async () => {
+                    if (user != undefined) {
+                        
+                        const res = await SU(user.uid, post.id)
+                        if (res != false) {
+                            setPost({...post, likes: post.likes + 1})
+                        }
+                    }
+                }}/>
                 : loaded ? <p>post not found</p> : <p>loading...</p>}
             <h1>Comments</h1>
             <h2>Add a comment</h2>

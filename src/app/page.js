@@ -1,11 +1,11 @@
 "use client"
 import Post from "c/post";
-import {getPosts, getUser} from "@/server/processor"
+import { getPosts, getUser, setUser as SU } from "@/server/processor"
 import { useEffect, useState } from "react";
 import { GrabFlagsEnabled } from "@/server/serverCFG";
 import fbConfig from '@/server/firebase';
 import { signInAnonymously, getAuth } from "firebase/auth";
-import {initializeApp} from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 
 export default function Home() {
   const [p, setPosts] = useState([])
@@ -40,13 +40,17 @@ export default function Home() {
   }, [user])
   return (
     <>
-    <main>
-      <h1>Top 10 latest posts:</h1>
-      {/* Only load 5 posts at a time */}
-      {p.length > 0 ? p.map((post) => (
-        <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
-      )): <p>no posts yet</p>}
-    </main>
+      <main>
+        <h1>Top 10 latest posts:</h1>
+        {/* Only load 5 posts at a time */}
+        {p.length > 0 ? p.map((post) => (
+          <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
+            if (user != undefined) {
+              SU(user.uid, post.id)
+            }
+          }} />
+        )) : <p>no posts yet</p>}
+      </main>
     </>
   );
 }
