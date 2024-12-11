@@ -50,6 +50,15 @@ export default function Home() {
             }
           }} />
         )) : <p>no posts yet</p>}
+        <h1>Trending:</h1>
+        {/* Only load 5 posts at a time */}
+        {p.length > 0 ? p.sort((a, b) => (b.likes - a.likes)).map((post) => (
+          <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
+            if (user != undefined) {
+              SU(user.uid, post.id)
+            }
+          }} />
+        )) : <p>no posts yet</p>}
       </main>
     </>
   );
