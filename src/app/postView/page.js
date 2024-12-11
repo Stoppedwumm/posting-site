@@ -1,5 +1,5 @@
 "use client"
-import { getPosts, ProcessComment, GetComments } from "@/server/processor";
+import { getPosts, ProcessComment, GetComments, setUser, getUser } from "@/server/processor";
 import Post from "c/post";
 import Comment from "c/comment";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ export default function Home() {
     const [loaded, setLoaded] = useState(false)
     const [comments, setComments] = useState([])
     const [commentLoading, setCommentLoading] = useState(false)
+    const [user, setUser] = useState(undefined)
     const searchParams = useSearchParams()
     useEffect(() => {
         async function exec() {
@@ -35,6 +36,14 @@ export default function Home() {
         }
         exec()
     }, [post])
+    useEffect(() => {
+        async function exec() {
+          if (user != undefined) {
+            console.log(await getUser(user.uid))
+          }
+        }
+        exec()
+      }, [user])
     return (
         <>
             {post != undefined ?

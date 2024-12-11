@@ -1,6 +1,6 @@
 "use client"
 import Post from "c/post";
-import {getPosts, ProcessUser, test} from "@/server/processor"
+import {getPosts, getUser} from "@/server/processor"
 import { useEffect, useState } from "react";
 import { GrabFlagsEnabled } from "@/server/serverCFG";
 import fbConfig from '@/server/firebase';
@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     async function exec() {
       if (user != undefined) {
-        await test(user.uid)
+        console.log(await getUser(user.uid))
       }
     }
     exec()
