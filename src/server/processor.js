@@ -135,22 +135,17 @@ export async function getUser(uid) {
 export async function setUser(uid, like) {
     const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
     const val = (await fbdb.get(db)).val()
-    
-    console.log(val)
     if (val == null || val==undefined || val == "test") {
         fbdb.set(db, JSON.stringify({
             "likes": [like]
         }))
-        console.log(await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`))
+        await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`)
     } else {
         let likes = JSON.parse(val).likes
-        console.log("Likes:", likes)
-        console.log(likes.find((x) => x == like))
         if (like && likes.find((x) => x == like) == undefined) {
             likes.push(like)
-            console.log(await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`))
+            await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`)
         } else {
-            console.log("Already liked")
             return false
         }
         fbdb.set(db, JSON.stringify({
