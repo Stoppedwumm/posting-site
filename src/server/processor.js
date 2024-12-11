@@ -75,7 +75,36 @@ export async function getFlagsSecret() {
     return process.env.FLAGS_SECRET
 }
 
-export async function test(uid) {
+export async function getUser(uid) {
     const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
+    const val = (await fbdb.get(db)).val()
+    if (val == null || val == "test") {
+        fbdb.set(db, JSON.stringify({
+            "likes": []
+        }))
+        return {
+            "likes": []
+        }
+    } else {
+        return JSON.parse(val)
+    }
+}
+
+export async function setUser(uid, like) {
+    const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
+    const val = (await fbdb.get(db)).val()
+    if (val == null || val == "test") {
+        fbdb.set(db, JSON.stringify({
+            "likes": [like]
+        }))
+    } else {
+        let likes = JSON.parse(val).likes
+        if (like) {
+            likes.push(like)
+        }
+        fbdb.set(db, JSON.stringify({
+            "likes": likes
+        }))
+    }
 }
 

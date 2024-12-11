@@ -1,15 +1,19 @@
 "use client"
-import { getPosts, ProcessComment, GetComments } from "@/server/processor";
+import { getPosts, ProcessComment, GetComments, setUser, getUser } from "@/server/processor";
 import Post from "c/post";
 import Comment from "c/comment";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import fbConfig from '@/server/firebase';
+import { signInAnonymously, getAuth } from "firebase/auth";
+import {initializeApp} from 'firebase/app';
 
 export default function Home() {
     const [post, setPost] = useState(undefined)
     const [loaded, setLoaded] = useState(false)
     const [comments, setComments] = useState([])
     const [commentLoading, setCommentLoading] = useState(false)
+    const [user, setUser] = useState(undefined)
     const searchParams = useSearchParams()
     useEffect(() => {
         async function exec() {
@@ -35,6 +39,23 @@ export default function Home() {
         }
         exec()
     }, [post])
+    useEffect(() => {
+        async function exec() {
+          const app = initializeApp(fbConfig)
+          const auth = getAuth(app)
+          const login = await signInAnonymously(auth)
+          setUser(login.user)
+        }
+        exec()
+      }, [])
+    useEffect(() => {
+        async function exec() {
+          if (user != undefined) {
+            console.log(await getUser(user.uid))
+          }
+        }
+        exec()
+      }, [user])
     return (
         <>
             {post != undefined ?
