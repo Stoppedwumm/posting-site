@@ -34,7 +34,7 @@ export async function processPost(data) {
     }
 
     // Perform the SQL query with tags included
-    const query = `INSERT INTO posts (title, content, tags) VALUES ('${data[0].title}', '${data[0].file.cdnUrl}', '${tagsString}')`;
+    const query = `INSERT INTO posts (title, content, tags, likes) VALUES ('${data[0].title}', '${data[0].file.cdnUrl}', '${tagsString}', 0)`;
 
     try {
         const res = await sql(query); // Assuming sql is a function that runs the query
@@ -78,29 +78,40 @@ export async function getFlagsSecret() {
 export async function getUser(uid) {
     const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
     const val = (await fbdb.get(db)).val()
+    let result = undefined
     if (val == null || val == "test") {
         fbdb.set(db, JSON.stringify({
             "likes": []
         }))
-        return {
+        result = {
             "likes": []
         }
     } else {
-        return JSON.parse(val)
+        result = JSON.parse(val)
     }
+    return result
 }
 
 export async function setUser(uid, like) {
     const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
     const val = (await fbdb.get(db)).val()
-    if (val == null || val == "test") {
+    
+    console.log(val)
+    if (val == null || val==undefined || val == "test") {
         fbdb.set(db, JSON.stringify({
             "likes": [like]
         }))
+        console.log(await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`))
     } else {
         let likes = JSON.parse(val).likes
-        if (like) {
+        console.log("Likes:", likes)
+        console.log(likes.find((x) => x == like))
+        if (like && likes.find((x) => x == like) == undefined) {
             likes.push(like)
+            console.log(await sql(`UPDATE posts SET likes = likes + 1 WHERE id = ${like}`))
+        } else {
+            console.log("Already liked")
+            return false
         }
         fbdb.set(db, JSON.stringify({
             "likes": likes
