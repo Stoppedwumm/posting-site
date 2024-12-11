@@ -1,5 +1,9 @@
 "use server"
 import { neon } from "@neondatabase/serverless";
+import {app as fbApp} from "./fbdriver"
+import * as fbdb from "firebase/database"
+import 'firebase/firestore';
+import "firebase-admin/app";
 const sql = neon(process.env.DATABASE_URL, { ssl: { rejectUnauthorized: false } });
 let tags = ["memes", "funny", "awards", "wat?", "genau diggi", "wieso?", "hör mit deinen augen", "mit herzen von yannick", "gejoostet", "julius", "CLEEEEMMMMMEEEEENNS", "hannes"]
 // try creating table if not exists
@@ -70,3 +74,8 @@ export async function GetComments(postId) {
 export async function getFlagsSecret() {
     return process.env.FLAGS_SECRET
 }
+
+export async function test(uid) {
+    const db = fbdb.ref(fbdb.getDatabase(fbApp, "https://st-post-5f692-default-rtdb.europe-west1.firebasedatabase.app"), "/users/" + uid)
+}
+
