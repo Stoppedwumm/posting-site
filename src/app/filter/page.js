@@ -2,12 +2,16 @@
 import { getPosts, GetTags } from "@/server/processor";
 import { useState, useEffect, use } from "react";
 import Post from "c/post"
+import fbConfig from '@/server/firebase';
+import { signInAnonymously, getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app'
 
 export default function Filter() {
     const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])
     const [selectedTags, setSelectedTags] = useState([])
     const [filteredPosts, setFilteredPosts] = useState([])
+    const [user, setUser] = useState(undefined)
     useEffect(() => {
         async function exec() {
             const posts = await getPosts()
@@ -26,6 +30,15 @@ export default function Filter() {
         }
         filterPosts()
     }, [selectedTags, posts])
+    useEffect(() => {
+        async function exec() {
+          const app = initializeApp(fbConfig)
+          const auth = getAuth(app)
+          const login = await signInAnonymously(auth)
+          setUser(login.user)
+        }
+        exec()
+      }, [])
     return (
         <div>
             <h1>Filter</h1>
@@ -39,7 +52,11 @@ export default function Filter() {
             )})}
             <h2>Posts</h2>
             {filteredPosts.map((post) => {return (
-                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id}/>
+                <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
+                    if (user != undefined) {
+                      SU(user.uid, post.id)
+                    }
+                  }} />
             )})}
         </div>
     );
