@@ -60,6 +60,7 @@ export default function Home() {
       <main>
         <h1>Top 10 latest posts:</h1>
         {/* Only load 5 posts at a time */}
+        <top10>
         {p.length > 0 ? p.map((post) => (
           <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
             if (user != undefined) {
@@ -67,15 +68,18 @@ export default function Home() {
             }
           }} />
         )) : <p>no posts yet</p>}
+        </top10>
         <h1>Trending:</h1>
         {/* Only load 5 posts at a time */}
-        {p.length > 0 ? p.sort((a, b) => (b.likes - a.likes)).map((post) => (
-          <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
-            if (user != undefined) {
-              SU(user.uid, post.id)
-            }
-          }} />
-        )) : <p>no posts yet</p>}
+        <trending>
+          {p.length > 0 ? p.sort((a, b) => (b.likes - a.likes)).map((post) => (
+            <Post key={post.id} title={post.title} cdnUrl={post.content} tags={post.tags} id={post.id} likes={post.likes} onLikeClick={() => {
+              if (user != undefined) {
+                SU(user.uid, post.id)
+              }
+            }} />
+          )) : <p>no posts yet</p>}
+        </trending>
       </main>
     </>
   );
