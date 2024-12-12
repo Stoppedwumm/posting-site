@@ -1,5 +1,5 @@
-import { Header } from './header';
 "use client"
+import { Header } from '@/comps/header';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/custom.css";
 import { Suspense, useEffect } from 'react'
